@@ -1,0 +1,19 @@
+.DS_Store
+node_modules
+dist
+dist-types
+
+client/**/*.js
+client/**/*.map
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
