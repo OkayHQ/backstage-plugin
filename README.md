@@ -4,6 +4,8 @@ Welcome to the [Okay](https://www.okayhq.com/) plugin!
 
 This plugin connects Backstage with your Okay account to connect your Okay team analytics to Backstage.
 
+
+
 Currently, this plugin displays the list of company saved dashboards. Coming soon is the ability to render
 any saved dashboard or chart directly in Backstage.
 
