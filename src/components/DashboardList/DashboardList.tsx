@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Backstage Authors
+ * Copyright 2022 Okay, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,14 +38,7 @@ export const DenseTable = ({ dashboards }: { dashboards: Dashboard[] }) => {
     {
       title: 'Owner',
       render: (data: Dashboard): React.ReactNode => {
-        if (data.creatorKnownPeopleSlackProfileImage) {
-          return (
-            <Avatar
-              alt={data.creatorKnownPeopleDisplayName}
-              src={data.creatorKnownPeopleSlackProfileImage}
-            />
-          );
-        } else if (data.creatorKnownPeopleDisplayName) {
+        if (data.creatorKnownPeopleDisplayName) {
           const parts = data.creatorKnownPeopleDisplayName.split(' ').filter((p) => p.length > 0);
           const initials =
             parts.length === 2
