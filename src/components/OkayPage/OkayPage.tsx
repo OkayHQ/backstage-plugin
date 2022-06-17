@@ -17,6 +17,7 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import { Header, Page, Content, ContentHeader } from '@backstage/core-components';
 import { DashboardList } from '../DashboardList';
+import { DashboardIFrame } from '../DashboardIFrame';
 
 export const OkayPage = () => (
   <Page themeId="tool">
@@ -24,6 +25,9 @@ export const OkayPage = () => (
     <Content>
       <ContentHeader title="Okay" />
       <Grid container spacing={3} direction="column">
+        <Grid item>
+          <DashboardIFrame />
+        </Grid>
         <Grid item>
           <DashboardList />
         </Grid>
