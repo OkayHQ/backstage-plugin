@@ -1,5 +1,5 @@
 {
-  "name": "@backstage/plugin-okay",
+  "name": "@okayhq/backstage-plugin",
   "version": "0.0.0",
   "main": "src/index.ts",
   "types": "src/index.ts",

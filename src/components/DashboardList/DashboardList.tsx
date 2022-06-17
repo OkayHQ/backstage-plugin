@@ -38,14 +38,7 @@ export const DenseTable = ({ dashboards }: { dashboards: Dashboard[] }) => {
     {
       title: 'Owner',
       render: (data: Dashboard): React.ReactNode => {
-        if (data.creatorKnownPeopleSlackProfileImage) {
-          return (
-            <Avatar
-              alt={data.creatorKnownPeopleDisplayName}
-              src={data.creatorKnownPeopleSlackProfileImage}
-            />
-          );
-        } else if (data.creatorKnownPeopleDisplayName) {
+        if (data.creatorKnownPeopleDisplayName) {
           const parts = data.creatorKnownPeopleDisplayName.split(' ').filter((p) => p.length > 0);
           const initials =
             parts.length === 2
