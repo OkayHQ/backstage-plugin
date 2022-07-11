@@ -19,7 +19,7 @@ import { setupServer } from 'msw/node';
 import { setupRequestMockHandlers, TestApiRegistry } from '@backstage/test-utils';
 import { ApiProvider } from '@backstage/core-app-api';
 import { DashboardList } from './DashboardList';
-import { okayApiRef } from '../../api';
+import { okayProxyApiRef } from '../../api';
 
 describe('DashboardComponent', () => {
   const server = setupServer();
@@ -30,7 +30,7 @@ describe('DashboardComponent', () => {
   const dashboardName2 = 'OKRs Q1 2022'
   const apis = TestApiRegistry.from(
     [
-      okayApiRef,
+      okayProxyApiRef,
       {
         dashboards: () => Promise.resolve({dashboards: [
           {

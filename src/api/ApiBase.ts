@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
-import { createDevApp } from '@backstage/dev-utils';
-import { okayPlugin, OkayPage } from '../src/plugin';
+export abstract class ApiBase {
+  protected abstract apiUrl(): Promise<string>;
 
-createDevApp()
-  .registerPlugin(okayPlugin)
-  .addPage({
-    element: <OkayPage uuid="" />,
-    title: 'Root Page',
-    path: '/okay'
-  })
-  .render();
+  private async _fetch(path: string): Promise<Response> {
+    const apiUrl = await this.apiUrl();
+    const resp = await fetch(`${apiUrl}${path}`);
+    if (!resp.ok) {
+      throw new Error(`Fetch request failed status=${resp.status} statusText=${resp.statusText}`);
+    }
+    return resp;
+  }
+
+  protected async fetchJson<T = any>(path: string): Promise<T> {
+    return (await this._fetch(path)).json();
+  }
+
+}

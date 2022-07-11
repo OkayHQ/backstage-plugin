@@ -22,7 +22,7 @@ import Alert from '@material-ui/lab/Alert';
 import { Link, Avatar } from '@material-ui/core';
 
 import { Dashboard } from '../../types';
-import { okayApiRef } from '../../api';
+import { okayProxyApiRef } from '../../api';
 
 export const DenseTable = ({ dashboards }: { dashboards: Dashboard[] }) => {
   const columns: TableColumn<Dashboard>[] = [
@@ -42,8 +42,8 @@ export const DenseTable = ({ dashboards }: { dashboards: Dashboard[] }) => {
           const parts = data.creatorKnownPeopleDisplayName.split(' ').filter((p) => p.length > 0);
           const initials =
             parts.length === 2
-              ? `${parts[0][0].toUpperCase()} ${parts[1][0].toUpperCase()}`
-              : `${parts[0][0].toUpperCase}`;
+              ? `${parts[0][0].toUpperCase()}${parts[1][0].toUpperCase()}`
+              : `${parts[0][0].toUpperCase()}`;
           return <Avatar>{initials}</Avatar>;
         }
         return <span>Okay Preset</span>;
@@ -71,8 +71,8 @@ export const DenseTable = ({ dashboards }: { dashboards: Dashboard[] }) => {
 };
 
 export const DashboardList = () => {
-  const okayApi = useApi(okayApiRef);
-  const { value, loading, error } = useAsync(async () => await okayApi.dashboards());
+  const okayProxyApi = useApi(okayProxyApiRef);
+  const { value, loading, error } = useAsync(async () => await okayProxyApi.dashboards());
 
   if (loading) {
     return <Progress />;

@@ -19,7 +19,7 @@ import { lightTheme } from '@backstage/theme';
 import { setupServer } from 'msw/node';
 import { setupRequestMockHandlers, renderInTestApp, TestApiRegistry } from '@backstage/test-utils';
 import { ApiProvider } from '@backstage/core-app-api';
-import { okayApiRef } from '../../api';
+import { okayProxyApiRef } from '../../api';
 import { OkayPage } from './OkayPage';
 
 describe('OkayPage', () => {
@@ -28,14 +28,14 @@ describe('OkayPage', () => {
   setupRequestMockHandlers(server);
 
   const apis = TestApiRegistry.from(
-    [ okayApiRef, { dashboards: () => Promise.resolve({dashboards: []}) }]
+    [ okayProxyApiRef, { dashboards: () => Promise.resolve({dashboards: []}) }]
   );
 
   it('should render', async () => {
     const rendered = await renderInTestApp(
       <ApiProvider apis={apis}>
         <ThemeProvider theme={lightTheme}>
-          <OkayPage />
+          <OkayPage uuid="" />
         </ThemeProvider>
       </ApiProvider>
     );

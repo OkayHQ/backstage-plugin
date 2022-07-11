@@ -13,15 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
-import { createDevApp } from '@backstage/dev-utils';
-import { okayPlugin, OkayPage } from '../src/plugin';
-
-createDevApp()
-  .registerPlugin(okayPlugin)
-  .addPage({
-    element: <OkayPage uuid="" />,
-    title: 'Root Page',
-    path: '/okay'
-  })
-  .render();
+export interface Config {
+    okay: {
+        /**
+         * Path to use for proxy, default is /okay/api
+         * @visibility frontend
+         */
+        proxyPath?: string;
+    }
+}
