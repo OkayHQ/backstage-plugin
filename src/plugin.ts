@@ -21,7 +21,7 @@ import {
   createRoutableExtension,
   discoveryApiRef
 } from '@backstage/core-plugin-api';
-import { OkayApiClient, okayApiRef } from './api';
+import { OkayBackendPluginApiClient, okayBackendPluginApiRef, OkayProxyApiClient, okayProxyApiRef } from './api';
 
 import { rootRouteRef } from './routes';
 
@@ -32,12 +32,25 @@ export const okayPlugin = createPlugin({
   },
   apis: [
     createApiFactory({
-      api: okayApiRef,
-      deps: { discoveryApi: discoveryApiRef, configApi: configApiRef },
+      api: okayProxyApiRef,
+      deps: { 
+        discoveryApi: discoveryApiRef,
+        configApi: configApiRef
+      },
       factory: ({ discoveryApi, configApi }) =>
-        new OkayApiClient({
+        new OkayProxyApiClient({
           discoveryApi: discoveryApi,
           proxyPath: configApi.getOptionalString('okay.proxyPath'),
+        })
+    }),
+    createApiFactory({
+      api: okayBackendPluginApiRef,
+      deps: { 
+        discoveryApi: discoveryApiRef
+      },
+      factory: ({ discoveryApi }) =>
+        new OkayBackendPluginApiClient({
+          discoveryApi: discoveryApi
         })
     })
   ]
@@ -56,6 +69,15 @@ export const OkayDashboardComponent = okayPlugin.provide(
     name: 'OkayDashboardList',
     component: {
       lazy: () => import('./components/DashboardList').then((m) => m.DashboardList)
+    }
+  })
+);
+
+export const OkayDashboardIframeComponent = okayPlugin.provide(
+  createComponentExtension({
+    name: 'OkayDashboardIframe',
+    component: {
+      lazy: () => import('./components/DashboardIframe').then((m) => m.DashboardIframe)
     }
   })
 );
