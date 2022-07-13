@@ -13,4 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { okayPlugin, OkayPage } from './plugin';
+export { okayPlugin, OkayPage, OkayDashboardComponent, OkayDashboardIframeComponent } from './plugin';
