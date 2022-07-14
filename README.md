@@ -46,13 +46,18 @@ The dashboard iframe component renders an iframe of an Okay dashboard.
     ```
 1. Go to your Okay account and [add a new "Iframe Allowed Domain"](https://app.okayhq.com/settings/edit/company). Input the domain of your backstage instance and save the **secret** and **id** that Okay returns to you.
     
-2. Save the secret from the previous step as a backstage secret. Add the Okay iframe configuration `app-config.yaml`.
+2. Save the secret from the previous step as a backstage secret. Add the Okay iframe configuration `app-config.yaml`, and update your backend CSP to allow iframing app.okayhq.com.
     ```
     # app-config.yaml
+    backend:
+      ...
+      csp:
+        connect-src: ["'self'", 'http:', 'https:']
+        frame-src: ["'self'", 'https://app.okayhq.com/']
     okay:
       iframe:
         secret: ${OKAY_IFRAME_SECRET}
-        id: <Your Okay iframe ID, like 5e4065a7-0d4a-414c-aad4-56d49035ce96>
+        id: ${OKAY_IFRAME_ID}
     ```
   
 3. Install the Okay Backend plugin in packages/backend. 
