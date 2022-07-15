@@ -28,5 +28,4 @@ export abstract class ApiBase {
   protected async fetchJson<T = any>(path: string): Promise<T> {
     return (await this._fetch(path)).json();
   }
-
 }

@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 export interface Config {
+  /**
+   * @visibility frontend
+   */
+  okay?: {
+    /**
+     * Path to use for proxy, default is /okay/api
+     * @visibility frontend
+     */
+    proxyPath?: string;
+
     /**
      * @visibility frontend
      */
-    okay?: {
-        /**
-         * Path to use for proxy, default is /okay/api
-         * @visibility frontend
-         */
-        proxyPath?: string;
-
-        /**
-         * @visibility frontend
-         */
-        iframe: {
-            /**
-             * Domain to make iframe requests to, default is https://app.okayhq.com
-             * @visibility frontend
-             */
-            domain?: string;
-        }
-    }
+    iframe: {
+      /**
+       * Domain to make iframe requests to, default is https://app.okayhq.com
+       * @visibility frontend
+       */
+      domain?: string;
+    };
+  };
 }

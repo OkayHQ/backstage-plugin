@@ -44,8 +44,7 @@ export class OkayBackendPluginApiClient extends ApiBase implements OkayBackendPl
   /**
    * @returns The url for the provided Okay dashboard UUID
    */
-   async iframeUrl(uuid: string): Promise<{ url: string }> {
+  async iframeUrl(uuid: string): Promise<{ url: string }> {
     return this.fetchJson<{ url: string }>(`/iframe_url/${uuid}`);
   }
-
 }

@@ -52,7 +52,7 @@ export class OkayProxyApiClient extends ApiBase implements OkayProxyApi {
    * @returns A list of all public dashboards for the company. Drafted (private) dashboards are
    *          not returned.
    */
-   async dashboards(): Promise<{ dashboards: Dashboard[] }> {
+  async dashboards(): Promise<{ dashboards: Dashboard[] }> {
     return this.fetchJson<{ dashboards: Dashboard[] }>(`/api/external/dashboards`);
   }
 }

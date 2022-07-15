@@ -22,8 +22,7 @@ import { Progress } from '@backstage/core-components';
 import Alert from '@material-ui/lab/Alert';
 import { okayBackendPluginApiRef } from '../../api/OkayBackendPluginApi';
 
-
-const DashboardIframeCard = ({ dashboard }: { dashboard: {url: string} }) => {
+const DashboardIframeCard = ({ dashboard }: { dashboard: { url: string } }) => {
   return (
     <Card>
       <CardContent>
@@ -37,10 +36,10 @@ const DashboardIframeCard = ({ dashboard }: { dashboard: {url: string} }) => {
         />
       </CardContent>
     </Card>
-  )
+  );
 };
 
-export const DashboardIframe = (props: {uuid: string}) => {
+export const DashboardIframe = (props: { uuid: string }) => {
   // Add event listener to indicate that we're on the login page (no login cookies). Because we don't
   // want to actually support the login page in an iframe, which would be necessary as part of the login
   // redirect flow, instead we direct users to open a new tab and log into Okay. This will set their
@@ -48,20 +47,23 @@ export const DashboardIframe = (props: {uuid: string}) => {
   const config = useApi(configApiRef);
   const domain = config.getOptionalString('okay.iframe.domain');
 
-  const [login, setLogin] = React.useState({ 
+  const [login, setLogin] = React.useState({
     renderLogin: false,
     refreshPage: false
-  })
+  });
 
-  window.addEventListener('message', (event) => {
-    if (event.origin === domain && event.type === 'message' && event.data === 'login_page') {
-      setLogin({ renderLogin: true, refreshPage: false })
-    } else {
-      // postMessage sent from different origin than the iframe, do nothing
-    }
-  }, false);
+  window.addEventListener(
+    'message',
+    (event) => {
+      if (event.origin === domain && event.type === 'message' && event.data === 'login_page') {
+        setLogin({ renderLogin: true, refreshPage: false });
+      } else {
+        // postMessage sent from different origin than the iframe, do nothing
+      }
+    },
+    false
+  );
 
-  
   const okayApi = useApi(okayBackendPluginApiRef);
   const { value, loading, error } = useAsync(async () => await okayApi.iframeUrl(props.uuid));
 
@@ -79,13 +81,19 @@ export const DashboardIframe = (props: {uuid: string}) => {
           <Typography gutterBottom variant="body2" color="textSecondary">
             Log in to Okay to see your dashboard
           </Typography>
-          <Button size="small" variant="contained" onClick={() => {
+          <Button
+            size="small"
+            variant="contained"
+            onClick={() => {
               setLogin({ renderLogin: false, refreshPage: true });
               window.open(`${domain}`, '_blank');
-          }}>Take me to Okay</Button>
+            }}
+          >
+            Take me to Okay
+          </Button>
         </CardContent>
       </Card>
-    )
+    );
   } else if (login.refreshPage) {
     return (
       <Card>
@@ -98,8 +106,8 @@ export const DashboardIframe = (props: {uuid: string}) => {
           </Typography>
         </CardContent>
       </Card>
-    )
+    );
   }
 
-  return <DashboardIframeCard dashboard={ { url: value.url }} />;
+  return <DashboardIframeCard dashboard={{ url: value.url }} />;
 };
