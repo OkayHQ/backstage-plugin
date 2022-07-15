@@ -26,44 +26,46 @@ describe('DashboardComponent', () => {
   // Enable sane handlers for network requests
   setupRequestMockHandlers(server);
 
-  const dashboardName1 = 'Incidents Dashboard'
-  const dashboardName2 = 'OKRs Q1 2022'
-  const apis = TestApiRegistry.from(
-    [
-      okayProxyApiRef,
-      {
-        dashboards: () => Promise.resolve({dashboards: [
-          {
-            type: 'custom' as const,
-            url: 'https://www.okayhq.com/fake/url/aaa',
-            uuid: 'aaa',
-            name: dashboardName1,
-            userLastUpdatedAt: '2022-06-14T22:25:16Z',
-            isDraft: false,
-            isReadOnly: false,
-            creatorKnownPeopleDisplayName: 'Firstname Lastname',
-            creatorKnownPeopleSlackProfileImage: 'image1'
-          },{
-            type: 'custom' as const,
-            url: 'https://www.okayhq.com/fake/url/bbb',
-            uuid: 'bbb',
-            name:dashboardName2,
-            userLastUpdatedAt: '2022-06-10T10:20:10Z',
-            isDraft: false,
-            isReadOnly: false,
-            creatorKnownPeopleDisplayName: 'Otherfirstname Otherlastname',
-            creatorKnownPeopleSlackProfileImage: 'image2'
-          }
-        ]})
-      }
-    ],
-  );
-  
+  const dashboardName1 = 'Incidents Dashboard';
+  const dashboardName2 = 'OKRs Q1 2022';
+  const apis = TestApiRegistry.from([
+    okayProxyApiRef,
+    {
+      dashboards: () =>
+        Promise.resolve({
+          dashboards: [
+            {
+              type: 'custom' as const,
+              url: 'https://www.okayhq.com/fake/url/aaa',
+              uuid: 'aaa',
+              name: dashboardName1,
+              userLastUpdatedAt: '2022-06-14T22:25:16Z',
+              isDraft: false,
+              isReadOnly: false,
+              creatorKnownPeopleDisplayName: 'Firstname Lastname',
+              creatorKnownPeopleSlackProfileImage: 'image1'
+            },
+            {
+              type: 'custom' as const,
+              url: 'https://www.okayhq.com/fake/url/bbb',
+              uuid: 'bbb',
+              name: dashboardName2,
+              userLastUpdatedAt: '2022-06-10T10:20:10Z',
+              isDraft: false,
+              isReadOnly: false,
+              creatorKnownPeopleDisplayName: 'Otherfirstname Otherlastname',
+              creatorKnownPeopleSlackProfileImage: 'image2'
+            }
+          ]
+        })
+    }
+  ]);
+
   it('should render list of dashboards', async () => {
     const rendered = render(
       <ApiProvider apis={apis}>
         <DashboardList />
-      </ApiProvider>,
+      </ApiProvider>
     );
     expect(await rendered.findByText('Dashboards')).toBeInTheDocument();
     expect(await rendered.findByText(dashboardName1)).toBeInTheDocument();

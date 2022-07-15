@@ -27,9 +27,10 @@ describe('OkayPage', () => {
   // Enable sane handlers for network requests
   setupRequestMockHandlers(server);
 
-  const apis = TestApiRegistry.from(
-    [ okayProxyApiRef, { dashboards: () => Promise.resolve({dashboards: []}) }]
-  );
+  const apis = TestApiRegistry.from([
+    okayProxyApiRef,
+    { dashboards: () => Promise.resolve({ dashboards: [] }) }
+  ]);
 
   it('should render', async () => {
     const rendered = await renderInTestApp(
@@ -39,6 +40,8 @@ describe('OkayPage', () => {
         </ThemeProvider>
       </ApiProvider>
     );
-    expect(rendered.getByText('Flexible analytics and reporting for software teams')).toBeInTheDocument();
+    expect(
+      rendered.getByText('Flexible analytics and reporting for software teams')
+    ).toBeInTheDocument();
   });
 });

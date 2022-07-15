@@ -19,17 +19,17 @@ import { Header, Page, Content, ContentHeader } from '@backstage/core-components
 import { DashboardList } from '../DashboardList';
 import { DashboardIframe } from '../DashboardIframe';
 
-export const OkayPage = (props: {uuid?: string}) => (
+export const OkayPage = (props: { uuid?: string }) => (
   <Page themeId="tool">
     <Header title="Okay" subtitle="Flexible analytics and reporting for software teams" />
     <Content>
       <ContentHeader title="Okay" />
       <Grid container spacing={3} direction="column">
-      { props.uuid && (
-        <Grid item >
-        <DashboardIframe uuid={props.uuid}/>
-      </Grid>
-      )}
+        {props.uuid && (
+          <Grid item>
+            <DashboardIframe uuid={props.uuid} />
+          </Grid>
+        )}
         <Grid item>
           <DashboardList />
         </Grid>

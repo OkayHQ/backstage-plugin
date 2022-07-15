@@ -21,7 +21,12 @@ import {
   createRoutableExtension,
   discoveryApiRef
 } from '@backstage/core-plugin-api';
-import { OkayBackendPluginApiClient, okayBackendPluginApiRef, OkayProxyApiClient, okayProxyApiRef } from './api';
+import {
+  OkayBackendPluginApiClient,
+  okayBackendPluginApiRef,
+  OkayProxyApiClient,
+  okayProxyApiRef
+} from './api';
 
 import { rootRouteRef } from './routes';
 
@@ -33,19 +38,19 @@ export const okayPlugin = createPlugin({
   apis: [
     createApiFactory({
       api: okayProxyApiRef,
-      deps: { 
+      deps: {
         discoveryApi: discoveryApiRef,
         configApi: configApiRef
       },
       factory: ({ discoveryApi, configApi }) =>
         new OkayProxyApiClient({
           discoveryApi: discoveryApi,
-          proxyPath: configApi.getOptionalString('okay.proxyPath'),
+          proxyPath: configApi.getOptionalString('okay.proxyPath')
         })
     }),
     createApiFactory({
       api: okayBackendPluginApiRef,
-      deps: { 
+      deps: {
         discoveryApi: discoveryApiRef
       },
       factory: ({ discoveryApi }) =>
